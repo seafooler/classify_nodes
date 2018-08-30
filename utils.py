@@ -251,3 +251,9 @@ def create_action_table(table_name):
 def drop_table(table_name):
     drop_table_sql = """DROP TABLE {}""".format(table_name)
     exeSQL(drop_table_sql)
+    
+def fetchAddressSet(account_type, action_table_name):
+    fetch_addrs_sql = ("SELECT {} FROM {}").format(account_type, action_table_name)
+    addrs = exeSQL(fetch_addrs_sql)
+    flat_addrs = [item for sublist in addrs for item in sublist]
+    return set((flat_addrs))
